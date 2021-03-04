@@ -1,0 +1,17 @@
+/* body {
+    background-color: rgba(138, 129, 129, 0.541);
+} */
+
+.header {
+    color: brown;
+}
+
+.navLink {
+    text-decoration: none;
+    margin: 0 30px;
+    text-transform: uppercase;
+}
+
+.activeNavLink {
+    color: red;
+}
