@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import Cast from '../../components/cast/Cast';
+import Reviews from '../../components/reviews/Reviews';
 import style from './MovieDetailsPage.module.css';
-
-const key = '2487d6ba70f133fc4d6ed7cf34c84c4e';
 
 class MovieDetailsPage extends Component {
   state = {
     poster_path: '',
     title: '',
     release_date: '',
-    popularity: null,
+    vote_average: null,
     overview: '',
     genres: [],
     id: null,
@@ -18,9 +19,12 @@ class MovieDetailsPage extends Component {
   async componentDidMount() {
     const { movieId } = this.props.match.params;
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}`,
+      `${process.env.REACT_APP_URL}/movie/${movieId}?api_key=${
+        process.env.REACT_APP_KEY
+      }`,
     );
-    // this.setState({ ...response.data });
+    // console.log(response.data);
+    this.setState({ ...response.data });
   }
 
   render() {
@@ -28,31 +32,60 @@ class MovieDetailsPage extends Component {
       poster_path,
       title,
       release_date,
-      popularity,
+      vote_average,
       overview,
       genres,
       id,
     } = this.state;
-
+    const { match } = this.props;
     return (
       <>
-        <h2>one movie page</h2>
-        <div>
-          <button type="button" className={style.button}>
-            Go back
-          </button>
-          <img src={poster_path} alt={title} />
-        </div>
-        <div>
-          <h1>
-            {title} {release_date}
-          </h1>
-          <p>Use score: {popularity}</p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <p>{genres}</p>
-        </div>
+        {id && (
+          <>
+            <div>
+              <button type="button" className={style.button}>
+                Go back
+              </button>
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                alt={title}
+              />
+            </div>
+            <div>
+              <h1>
+                {title} ({parseFloat(release_date)})
+              </h1>
+              <p>Use score: {vote_average * 10}%</p>
+              <h2>Overview</h2>
+              <p>{overview}</p>
+              <h3>Genres</h3>
+              {genres.map(genre => (
+                <p key={genre.id}>{genre.name}</p>
+              ))}
+            </div>
+            <div>
+              <p>Additional information</p>
+              <NavLink
+                to={`${match.url}/cast`}
+                className="navLink"
+                activeClassName="activeNavLink"
+              >
+                Cast
+              </NavLink>
+              <NavLink
+                to={`${match.url}/reviews`}
+                className="navLink"
+                activeClassName="activeNavLink"
+              >
+                Reviews
+              </NavLink>
+              <Switch>
+                <Route path={`${match.path}/cast`} component={Cast} />
+                <Route path={`${match.path}/reviews`} component={Reviews} />
+              </Switch>
+            </div>
+          </>
+        )}
       </>
     );
   }

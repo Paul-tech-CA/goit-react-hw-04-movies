@@ -1,0 +1,12 @@
+.list {
+    color: brown;
+    list-style: none;
+}
+
+.item {
+    color: darkblue;
+}
+
+.image {
+    width: 120px;
+}
