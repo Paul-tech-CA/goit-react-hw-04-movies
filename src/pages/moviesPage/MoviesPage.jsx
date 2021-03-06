@@ -7,24 +7,37 @@ class MoviesPage extends Component {
   state = {
     query: '',
     movies: [],
+    total_pages: 1,
   };
 
+  // componentDidUpdate() {
+  //   if (this.state.query !== this.state.) {
+  //     this.setState({ total_pages: 1 });
+  //   }
+  // }
+
   onHandleChange = event => {
+    if (!event.target.value) {
+      this.setState({ total_pages: 1 });
+    }
     this.setState({ query: event.target.value });
   };
 
-  onHandleSubmit = event => {
+  onHandleSubmit = async event => {
     event.preventDefault();
-    axios
-      .get(
-        `${process.env.REACT_APP_URL}/search/movie?api_key=${
-          process.env.REACT_APP_KEY
-        }&language=en-US&query=${this.state.query}&page=1&include_adult=false`,
-      )
-      .then(response => this.setState({ movies: response.data.results }));
+    const response = await axios.get(
+      `${process.env.REACT_APP_URL}/search/movie?api_key=${
+        process.env.REACT_APP_KEY
+      }&language=en-US&query=${this.state.query}&page=1&include_adult=false`,
+    );
+
+    this.setState({
+      movies: response.data.results,
+      total_pages: response.data.total_pages,
+    });
   };
   render() {
-    const { query, movies } = this.state;
+    const { query, movies, total_pages } = this.state;
     return (
       <>
         <form className={style.movieForm} onSubmit={this.onHandleSubmit}>
@@ -45,7 +58,7 @@ class MoviesPage extends Component {
           </button>
         </form>
         <>
-          {!movies.length && query.length > 0 ? (
+          {!total_pages ? (
             <p>Unknown input try one more time</p>
           ) : (
             <ul className={style.moviesList}>
