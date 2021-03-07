@@ -14,7 +14,6 @@ class Reviews extends Component {
         process.env.REACT_APP_KEY
       }&language=en-US&page=1`,
     );
-    console.log(response.data.results);
     this.setState({ reviews: response.data.results });
   }
 

@@ -14,7 +14,6 @@ class Cast extends Component {
         process.env.REACT_APP_KEY
       }&language=en-US`,
     );
-    console.log(response.data.cast);
     this.setState({ actors: response.data.cast });
   }
 

@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import qs from 'query-string';
 import style from './MoviesPage.module.css';
-// import { Link } from 'react-router-dom';
-// import MoviePreview from '../../components/moviePreview/MoviePreview';
 import MoviesList from '../../components/moviesList/MoviesList';
 
 class MoviesPage extends Component {
@@ -10,6 +9,32 @@ class MoviesPage extends Component {
     query: '',
     movies: [],
     total_pages: 1,
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.onQuerySearch(this.state.query);
+    }
+  }
+
+  componentDidMount() {
+    const { query } = qs.parse(this.props.location.search);
+    if (query) {
+      this.onQuerySearch(query);
+    }
+  }
+
+  onQuerySearch = async query => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_URL}/search/movie?api_key=${
+        process.env.REACT_APP_KEY
+      }&language=en-US&query=${query}&page=1&include_adult=false`,
+    );
+
+    this.setState({
+      movies: response.data.results,
+      total_pages: response.data.total_pages,
+    });
   };
 
   onHandleChange = event => {
@@ -21,15 +46,9 @@ class MoviesPage extends Component {
 
   onHandleSubmit = async event => {
     event.preventDefault();
-    const response = await axios.get(
-      `${process.env.REACT_APP_URL}/search/movie?api_key=${
-        process.env.REACT_APP_KEY
-      }&language=en-US&query=${this.state.query}&page=1&include_adult=false`,
-    );
-
-    this.setState({
-      movies: response.data.results,
-      total_pages: response.data.total_pages,
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      search: `query=${this.state.query}`,
     });
   };
   render() {

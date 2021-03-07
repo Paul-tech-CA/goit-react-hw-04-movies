@@ -16,7 +16,6 @@ const Navigation = () => {
       </NavLink>
 
       <NavLink
-        exact
         to={routes.moviesSearch}
         className={style.navLink}
         activeClassName={style.activeNavLink}
