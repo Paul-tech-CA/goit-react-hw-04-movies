@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import style from './MoviesPage.module.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import MoviePreview from '../../components/moviePreview/MoviePreview';
+import MoviesList from '../../components/moviesList/MoviesList';
 
 class MoviesPage extends Component {
   state = {
@@ -9,12 +11,6 @@ class MoviesPage extends Component {
     movies: [],
     total_pages: 1,
   };
-
-  // componentDidUpdate() {
-  //   if (this.state.query !== this.state.) {
-  //     this.setState({ total_pages: 1 });
-  //   }
-  // }
 
   onHandleChange = event => {
     if (!event.target.value) {
@@ -59,15 +55,9 @@ class MoviesPage extends Component {
         </form>
         <>
           {!total_pages ? (
-            <p>Unknown input try one more time</p>
+            <h3>Unknown input try one more time</h3>
           ) : (
-            <ul className={style.moviesList}>
-              {movies.map(movie => (
-                <li key={movie.id} className={style.movie}>
-                  <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-                </li>
-              ))}
-            </ul>
+            <MoviesList movies={movies} />
           )}
         </>
       </>

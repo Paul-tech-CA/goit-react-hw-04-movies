@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import style from './HomePage.module.css';
-import { Link } from 'react-router-dom';
+import MoviesList from '../../components/moviesList/MoviesList';
 
 export default class HomePage extends Component {
   state = {
@@ -14,7 +13,6 @@ export default class HomePage extends Component {
         process.env.REACT_APP_KEY
       }`,
     );
-    // console.log(response.data.results);
     this.setState({ movies: response.data.results });
   }
 
@@ -23,13 +21,7 @@ export default class HomePage extends Component {
     return (
       <>
         <h1>Trending today</h1>
-        <ul className={style.moviesList}>
-          {this.state.movies.map(movie => (
-            <li key={movie.id} className={style.movie}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-            </li>
-          ))}
-        </ul>
+        <MoviesList movies={this.state.movies} />
       </>
     );
   }

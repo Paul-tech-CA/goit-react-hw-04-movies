@@ -1,8 +1,15 @@
 import React from 'react';
-import { NavLink, Switch } from 'react-router-dom';
+import style from '../App.module.css';
+import Navigation from '../Navigation';
 
 const AppBar = () => {
-  return <div />;
+  return (
+    <>
+      <header className={style.appBar}>
+        <Navigation />
+      </header>
+    </>
+  );
 };
 
 export default AppBar;

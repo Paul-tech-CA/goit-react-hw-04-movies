@@ -4,6 +4,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import Cast from '../../components/cast/Cast';
 import Reviews from '../../components/reviews/Reviews';
 import style from './MovieDetailsPage.module.css';
+import routes from '../../routes';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -23,9 +24,17 @@ class MovieDetailsPage extends Component {
         process.env.REACT_APP_KEY
       }`,
     );
-    // console.log(response.data);
     this.setState({ ...response.data });
   }
+
+  handleGoBack = () => {
+    const { location, history } = this.props;
+    // if (location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+    // history.push(routes.home);
+    history.push(location?.state?.from || routes.home);
+  };
 
   render() {
     const {
@@ -38,12 +47,17 @@ class MovieDetailsPage extends Component {
       id,
     } = this.state;
     const { match } = this.props;
+
     return (
       <>
         {id && (
           <>
             <div>
-              <button type="button" className={style.button}>
+              <button
+                type="button"
+                className={style.button}
+                onClick={this.handleGoBack}
+              >
                 Go back
               </button>
               <img

@@ -1,0 +1,17 @@
+.card {
+    border: 1px solid black;
+    width: 360px;
+}
+
+.card>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.title {
+    text-align: center;
+    color: black;
+}
