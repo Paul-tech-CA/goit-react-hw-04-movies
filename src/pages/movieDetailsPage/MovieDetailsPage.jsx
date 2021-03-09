@@ -5,7 +5,8 @@ import Cast from '../../components/cast/Cast';
 import Reviews from '../../components/reviews/Reviews';
 import style from './MovieDetailsPage.module.css';
 import routes from '../../routes';
-import ContainedButtons from '../../components/button/Button';
+// import ContainedButtons from '../../components/button/Button';
+import Button from '@material-ui/core/Button';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -55,18 +56,22 @@ class MovieDetailsPage extends Component {
           <>
             <div className={style.mainCont}>
               <div>
-                {/* <ContainedButtons
-                  type="button"
-                  // className={style.button}
-                  onClick={this.handleGoBack}
-                /> */}
-                <button
+                <div className={style.buttonBack}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleGoBack}
+                  >
+                    Go back
+                  </Button>
+                </div>
+                {/* <button
                   type="button"
                   className={style.button}
                   onClick={this.handleGoBack}
                 >
                   Go back
-                </button>
+                </button> */}
                 <img
                   src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
                   alt={title}

@@ -1,23 +1,23 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+// import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     '& > *': {
+//       margin: theme.spacing(1),
+//     },
+//   },
+// }));
 
-export default function ContainedButtons() {
-  const classes = useStyles();
+// export default function ContainedButtons({ onClick }) {
+//   const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <Button variant="contained" color="primary">
-        Go back
-      </Button>
-    </div>
-  );
-}
+//   return (
+//     <div className={classes.root}>
+//       <Button variant="contained" color="primary" onClick={onClick}>
+//         Go back
+//       </Button>
+//     </div>
+//   );
+// }
