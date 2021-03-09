@@ -5,24 +5,26 @@ import style from './App.module.css';
 
 const Navigation = () => {
   return (
-    <nav className={style.nav}>
-      <NavLink
-        exact
-        to={routes.home}
-        className={style.navLink}
-        activeClassName={style.activeNavLink}
-      >
-        Home
-      </NavLink>
+    <div className={style.box}>
+      <nav className={style.nav}>
+        <NavLink
+          exact
+          to={routes.home}
+          className={style.navLink}
+          activeClassName={style.activeNavLink}
+        >
+          Home
+        </NavLink>
 
-      <NavLink
-        to={routes.moviesSearch}
-        className={style.navLink}
-        activeClassName={style.activeNavLink}
-      >
-        Movies
-      </NavLink>
-    </nav>
+        <NavLink
+          to={routes.moviesSearch}
+          className={style.navLink}
+          activeClassName={style.activeNavLink}
+        >
+          Movies
+        </NavLink>
+      </nav>
+    </div>
   );
 };
 

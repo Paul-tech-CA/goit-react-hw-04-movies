@@ -2,10 +2,6 @@
     background-color: rgba(138, 129, 129, 0.541);
 } */
 
-.header {
-    color: brown;
-}
-
 .navLink {
     text-decoration: none;
     margin: 0 30px;
@@ -14,4 +10,20 @@
 
 .activeNavLink {
     color: red;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, #33CCCC 0%, #00CC99 100%);
+}
+
+.nav {
+    padding: 0;
+    width: 300px;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
 }

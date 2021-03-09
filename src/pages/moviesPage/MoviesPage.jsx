@@ -68,6 +68,10 @@ class MoviesPage extends Component {
               onChange={this.onHandleChange}
             />
           </label>
+          {/* <Button
+            className={style.buttonSearch}
+            type="submit"
+          /> */}
           <button className={style.buttonSearch} type="submit">
             Search
           </button>

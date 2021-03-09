@@ -5,6 +5,7 @@ import Cast from '../../components/cast/Cast';
 import Reviews from '../../components/reviews/Reviews';
 import style from './MovieDetailsPage.module.css';
 import routes from '../../routes';
+import ContainedButtons from '../../components/button/Button';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -52,33 +53,40 @@ class MovieDetailsPage extends Component {
       <>
         {id && (
           <>
-            <div>
-              <button
-                type="button"
-                className={style.button}
-                onClick={this.handleGoBack}
-              >
-                Go back
-              </button>
-              <img
-                src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-                alt={title}
-              />
+            <div className={style.mainCont}>
+              <div>
+                {/* <ContainedButtons
+                  type="button"
+                  // className={style.button}
+                  onClick={this.handleGoBack}
+                /> */}
+                <button
+                  type="button"
+                  className={style.button}
+                  onClick={this.handleGoBack}
+                >
+                  Go back
+                </button>
+                <img
+                  src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                  alt={title}
+                />
+              </div>
+              <div className={style.descriptionCont}>
+                <h1>
+                  {title} ({parseFloat(release_date)})
+                </h1>
+                <h3>Use score: {vote_average * 10}%</h3>
+                <h3>Overview</h3>
+                <p>{overview}</p>
+                <h3>Genres</h3>
+                {genres.map(genre => (
+                  <p key={genre.id}>{genre.name}</p>
+                ))}
+              </div>
             </div>
-            <div>
-              <h1>
-                {title} ({parseFloat(release_date)})
-              </h1>
-              <p>Use score: {vote_average * 10}%</p>
-              <h2>Overview</h2>
-              <p>{overview}</p>
-              <h3>Genres</h3>
-              {genres.map(genre => (
-                <p key={genre.id}>{genre.name}</p>
-              ))}
-            </div>
-            <div>
-              <p>Additional information</p>
+            <div className={style.additionalCont}>
+              <h3>Additional information</h3>
               <NavLink
                 to={{
                   pathname: `${match.url}/cast`,
@@ -86,8 +94,8 @@ class MovieDetailsPage extends Component {
                     from: this.props.location?.state?.from,
                   },
                 }}
-                className="navLink"
-                activeClassName="activeNavLink"
+                className={style.navLink}
+                activeClassName={style.activeNavLink}
               >
                 Cast
               </NavLink>
@@ -98,8 +106,8 @@ class MovieDetailsPage extends Component {
                     from: this.props.location?.state?.from,
                   },
                 }}
-                className="navLink"
-                activeClassName="activeNavLink"
+                className={style.navLink}
+                activeClassName={style.activeNavLink}
               >
                 Reviews
               </NavLink>

@@ -1,3 +1,29 @@
 .button {
     background-color: rgb(52, 104, 180);
 }
+
+.mainCont {
+    display: flex;
+    padding-left: 30px;
+}
+
+.descriptionCont {
+    padding: 20px;
+}
+
+.navLink {
+    text-decoration: none;
+    margin: 0 30px;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.activeNavLink {
+    color: red;
+}
+
+.additionalCont {
+    text-decoration: none;
+    padding-left: 30px;
+    padding-top: 20px;
+}
